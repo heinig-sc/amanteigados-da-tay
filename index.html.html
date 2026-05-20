@@ -1,0 +1,566 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Amanteigados da Tay — Momentos de Puro Sabor</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --cream: #FAF5ED;
+    --warm-white: #FFF9F2;
+    --biscuit: #D4A96A;
+    --biscuit-dark: #B8864A;
+    --chocolate: #3D1C0B;
+    --chocolate-mid: #6B3A1F;
+    --jam: #9B2335;
+    --text: #2A1A0E;
+    --text-light: #6B5040;
+    --gold: #C8965A;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--cream);
+    color: var(--text);
+    font-family: 'Jost', sans-serif;
+    overflow-x: hidden;
+  }
+
+  /* ── HERO ── */
+  .hero {
+    min-height: 100vh;
+    position: relative;
+    display: grid;
+    place-items: center;
+    overflow: hidden;
+    background: var(--chocolate);
+  }
+
+  .hero-bg {
+    position: absolute; inset: 0;
+    background:
+      radial-gradient(ellipse 70% 60% at 30% 110%, #6B3A1F88 0%, transparent 60%),
+      radial-gradient(ellipse 50% 40% at 80% -10%, #C8965A33 0%, transparent 55%),
+      var(--chocolate);
+  }
+
+  .hero-grain {
+    position: absolute; inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.06'/%3E%3C/svg%3E");
+    opacity: 0.4;
+    pointer-events: none;
+  }
+
+  .hero-content {
+    position: relative; z-index: 1;
+    text-align: center;
+    padding: 2rem 1.5rem;
+    max-width: 680px;
+  }
+
+  .hero-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: .5rem;
+    border: 1px solid rgba(200,150,90,.4);
+    border-radius: 999px;
+    padding: .35rem 1.1rem;
+    font-size: .72rem;
+    letter-spacing: .18em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 2rem;
+    animation: fadeUp .8s ease both;
+  }
+
+  .hero-badge span { font-size: .9rem; }
+
+  .hero h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(3rem, 10vw, 5.5rem);
+    font-weight: 400;
+    line-height: 1.05;
+    color: var(--cream);
+    animation: fadeUp .8s .15s ease both;
+  }
+
+  .hero h1 em {
+    font-style: italic;
+    color: var(--biscuit);
+    display: block;
+  }
+
+  .hero-sub {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(1.1rem, 3vw, 1.45rem);
+    font-weight: 300;
+    color: rgba(250,245,237,.65);
+    margin-top: 1.2rem;
+    letter-spacing: .04em;
+    animation: fadeUp .8s .3s ease both;
+  }
+
+  .hero-pills {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: .6rem;
+    margin-top: 2rem;
+    animation: fadeUp .8s .45s ease both;
+  }
+
+  .pill {
+    background: rgba(200,150,90,.12);
+    border: 1px solid rgba(200,150,90,.3);
+    color: var(--biscuit);
+    padding: .4rem 1rem;
+    border-radius: 999px;
+    font-size: .78rem;
+    letter-spacing: .06em;
+    font-weight: 500;
+  }
+
+  .hero-cta {
+    display: inline-flex;
+    align-items: center;
+    gap: .6rem;
+    background: var(--biscuit);
+    color: var(--chocolate);
+    padding: .85rem 2.2rem;
+    border-radius: 999px;
+    font-weight: 500;
+    font-size: .95rem;
+    letter-spacing: .06em;
+    text-decoration: none;
+    margin-top: 2.5rem;
+    transition: background .2s, transform .2s;
+    animation: fadeUp .8s .6s ease both;
+  }
+
+  .hero-cta:hover { background: var(--biscuit-dark); transform: translateY(-2px); }
+
+  .hero-scroll {
+    position: absolute;
+    bottom: 2rem; left: 50%;
+    transform: translateX(-50%);
+    display: flex; flex-direction: column; align-items: center;
+    gap: .4rem;
+    color: rgba(200,150,90,.5);
+    font-size: .7rem;
+    letter-spacing: .15em;
+    text-transform: uppercase;
+    animation: fadeUp .8s .9s ease both;
+  }
+
+  .scroll-line {
+    width: 1px; height: 40px;
+    background: linear-gradient(to bottom, rgba(200,150,90,.5), transparent);
+    animation: scrollPulse 1.8s ease-in-out infinite;
+  }
+
+  /* ── IMAGES STRIP ── */
+  .strip {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    height: 220px;
+    overflow: hidden;
+  }
+
+  .strip img {
+    width: 100%; height: 100%;
+    object-fit: cover;
+    filter: brightness(.85) saturate(1.1);
+    transition: filter .3s;
+  }
+
+  .strip img:hover { filter: brightness(1) saturate(1.2); }
+
+  /* ── SECTION HEADER ── */
+  .section-header {
+    text-align: center;
+    padding: 4rem 1.5rem 2.5rem;
+  }
+
+  .section-label {
+    font-size: .72rem;
+    letter-spacing: .2em;
+    text-transform: uppercase;
+    color: var(--biscuit-dark);
+    font-weight: 500;
+    margin-bottom: .8rem;
+  }
+
+  .section-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(2rem, 6vw, 3.2rem);
+    font-weight: 400;
+    line-height: 1.15;
+    color: var(--text);
+  }
+
+  .section-title em {
+    font-style: italic;
+    color: var(--biscuit-dark);
+  }
+
+  .divider {
+    display: flex; align-items: center; justify-content: center;
+    gap: .8rem; margin: 1.2rem auto 0;
+    width: fit-content;
+  }
+
+  .divider-line { width: 40px; height: 1px; background: var(--biscuit); opacity: .5; }
+  .divider-dot { width: 5px; height: 5px; border-radius: 50%; background: var(--biscuit); }
+
+  /* ── PRODUCTS ── */
+  .products { padding: 1rem 1.5rem 5rem; max-width: 900px; margin: 0 auto; }
+
+  .product-card {
+    background: var(--warm-white);
+    border: 1px solid rgba(180,130,70,.15);
+    border-radius: 20px;
+    padding: 1.8rem 2rem;
+    margin-bottom: 1.2rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 1rem;
+    transition: box-shadow .25s, transform .25s;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .product-card::before {
+    content: '';
+    position: absolute; left: 0; top: 0; bottom: 0;
+    width: 4px;
+    background: var(--biscuit);
+    border-radius: 4px 0 0 4px;
+    opacity: 0;
+    transition: opacity .25s;
+  }
+
+  .product-card:hover { box-shadow: 0 8px 32px rgba(61,28,11,.1); transform: translateY(-2px); }
+  .product-card:hover::before { opacity: 1; }
+
+  .product-icon {
+    font-size: 2rem;
+    width: 56px; height: 56px;
+    background: rgba(200,150,90,.1);
+    border-radius: 14px;
+    display: grid; place-items: center;
+    flex-shrink: 0;
+  }
+
+  .product-info { flex: 1; }
+
+  .product-name {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.15rem;
+    font-weight: 700;
+    color: var(--text);
+    line-height: 1.3;
+  }
+
+  .product-detail {
+    font-size: .82rem;
+    color: var(--text-light);
+    margin-top: .25rem;
+    font-weight: 300;
+  }
+
+  .product-price {
+    text-align: right;
+    flex-shrink: 0;
+  }
+
+  .price-value {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.5rem;
+    color: var(--chocolate-mid);
+    font-weight: 700;
+  }
+
+  .price-unit {
+    font-size: .7rem;
+    color: var(--text-light);
+    letter-spacing: .05em;
+    text-transform: uppercase;
+    display: block;
+    margin-top: .1rem;
+  }
+
+  .card-chocolate { --accent: var(--chocolate-mid); }
+  .card-jam { --accent: var(--jam); }
+  .card-lemon { --accent: #7a9e3f; }
+  .card-cinnamon { --accent: #9B5A28; }
+
+  /* ── INFO BAR ── */
+  .info-bar {
+    background: var(--chocolate);
+    color: var(--cream);
+    padding: 2.5rem 1.5rem;
+    display: flex;
+    justify-content: center;
+    gap: 3rem;
+    flex-wrap: wrap;
+  }
+
+  .info-item {
+    display: flex; align-items: center; gap: .8rem;
+    font-size: .9rem;
+  }
+
+  .info-icon { font-size: 1.4rem; }
+
+  .info-item strong { display: block; font-weight: 500; margin-bottom: .1rem; }
+  .info-item span { font-size: .78rem; opacity: .65; font-weight: 300; }
+
+  /* ── CTA SECTION ── */
+  .cta-section {
+    background: var(--warm-white);
+    border-top: 1px solid rgba(180,130,70,.15);
+    padding: 5rem 1.5rem;
+    text-align: center;
+  }
+
+  .cta-section h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(1.8rem, 5vw, 2.8rem);
+    color: var(--text);
+    font-weight: 400;
+    line-height: 1.2;
+  }
+
+  .cta-section h2 em { font-style: italic; color: var(--biscuit-dark); }
+
+  .cta-section p {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.2rem;
+    color: var(--text-light);
+    margin-top: .8rem;
+    font-weight: 300;
+  }
+
+  .cta-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: .7rem;
+    background: #25D366;
+    color: #fff;
+    padding: 1rem 2.5rem;
+    border-radius: 999px;
+    font-weight: 500;
+    font-size: 1rem;
+    text-decoration: none;
+    margin-top: 2rem;
+    transition: background .2s, transform .2s;
+    letter-spacing: .04em;
+  }
+
+  .cta-btn:hover { background: #1da851; transform: translateY(-2px); }
+
+  /* ── FOOTER ── */
+  footer {
+    background: var(--chocolate);
+    color: rgba(250,245,237,.5);
+    text-align: center;
+    padding: 2rem;
+    font-size: .78rem;
+    letter-spacing: .05em;
+  }
+
+  footer strong { color: var(--biscuit); }
+
+  /* ── ANIMATIONS ── */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(24px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  @keyframes scrollPulse {
+    0%, 100% { opacity: .5; }
+    50%       { opacity: 1; }
+  }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 600px) {
+    .strip { grid-template-columns: repeat(2, 1fr); height: 280px; }
+    .info-bar { gap: 1.5rem; }
+    .product-card { flex-wrap: wrap; }
+    .product-price { flex-basis: 100%; text-align: left; }
+  }
+</style>
+</head>
+<body>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-grain"></div>
+  <div class="hero-content">
+    <div class="hero-badge"><span>🍪</span> Biscoitos Artesanais</div>
+    <h1>Amanteigados<em>da Tay</em></h1>
+    <p class="hero-sub">Momentos de Puro Sabor — A Doçura que Abraça.</p>
+    <div class="hero-pills">
+      <span class="pill">🏠 Feito em Casa</span>
+      <span class="pill">✨ Ingredientes Frescos</span>
+      <span class="pill">🎁 O Presente Perfeito</span>
+    </div>
+    <a href="#produtos" class="hero-cta">Ver sabores →</a>
+  </div>
+  <div class="hero-scroll">
+    <div class="scroll-line"></div>
+    scroll
+  </div>
+</section>
+
+<!-- PHOTO STRIP -->
+<div class="strip">
+  <img src="/mnt/user-data/uploads/tay1.jpeg" alt="Amanteigados sortidos">
+  <img src="/mnt/user-data/uploads/tay2.jpeg" alt="Amanteigado de goiabada">
+  <img src="/mnt/user-data/uploads/tay3.jpeg" alt="Biscoito de limão siciliano">
+  <img src="/mnt/user-data/uploads/tay4.jpeg" alt="Biscoito de canela">
+</div>
+
+<!-- PRODUCTS -->
+<div class="section-header" id="produtos">
+  <p class="section-label">Cardápio</p>
+  <h2 class="section-title">Escolha o seu <em>favorito</em></h2>
+  <div class="divider">
+    <div class="divider-line"></div>
+    <div class="divider-dot"></div>
+    <div class="divider-line"></div>
+  </div>
+</div>
+
+<div class="products">
+
+  <div class="product-card">
+    <div class="product-icon">🍪</div>
+    <div class="product-info">
+      <div class="product-name">Amanteigado de Baunilha</div>
+      <div class="product-detail">Clássico puro ou com cobertura de chocolate</div>
+    </div>
+    <div class="product-price">
+      <div class="price-value">R$14,00</div>
+      <span class="price-unit">100g / embalagem</span>
+    </div>
+  </div>
+
+  <div class="product-card">
+    <div class="product-icon">☕</div>
+    <div class="product-info">
+      <div class="product-name">Amanteigado de Chocolate, Café ou Canela</div>
+      <div class="product-detail">Sabores intensos com toque artesanal</div>
+    </div>
+    <div class="product-price">
+      <div class="price-value">R$14,50</div>
+      <span class="price-unit">100g / embalagem</span>
+    </div>
+  </div>
+
+  <div class="product-card">
+    <div class="product-icon">🌿</div>
+    <div class="product-info">
+      <div class="product-name">Biscoitos de Araruta</div>
+      <div class="product-detail">Leves, delicados e naturalmente sem glúten</div>
+    </div>
+    <div class="product-price">
+      <div class="price-value">R$15,00</div>
+      <span class="price-unit">100g / embalagem</span>
+    </div>
+  </div>
+
+  <div class="product-card">
+    <div class="product-icon">🍫</div>
+    <div class="product-info">
+      <div class="product-name">Amanteigado com Gota de Chocolate ou Goiabada</div>
+      <div class="product-detail">O recheinho que faz toda a diferença</div>
+    </div>
+    <div class="product-price">
+      <div class="price-value">R$16,00</div>
+      <span class="price-unit">100g / embalagem</span>
+    </div>
+  </div>
+
+  <div class="product-card">
+    <div class="product-icon">🍋</div>
+    <div class="product-info">
+      <div class="product-name">Amanteigado de Maracujá ou Limão Siciliano</div>
+      <div class="product-detail">Com ou sem cobertura de chocolate</div>
+    </div>
+    <div class="product-price">
+      <div class="price-value">R$16,50</div>
+      <span class="price-unit">100g / embalagem</span>
+    </div>
+  </div>
+
+</div>
+
+<!-- INFO BAR -->
+<div class="info-bar">
+  <div class="info-item">
+    <div class="info-icon">📦</div>
+    <div>
+      <strong>100g por embalagem</strong>
+      <span>Quantidade ideal para presentear</span>
+    </div>
+  </div>
+  <div class="info-item">
+    <div class="info-icon">🏠</div>
+    <div>
+      <strong>Feito em casa</strong>
+      <span>Com todo o cuidado e carinho</span>
+    </div>
+  </div>
+  <div class="info-item">
+    <div class="info-icon">✨</div>
+    <div>
+      <strong>Ingredientes frescos</strong>
+      <span>Qualidade em cada mordida</span>
+    </div>
+  </div>
+</div>
+
+<!-- CTA -->
+<section class="cta-section">
+  <h2>Quer encomendar ou <em>tirar dúvidas?</em></h2>
+  <p>Entre em contato e consulte nossa tabela de sabores disponíveis.</p>
+  <a href="https://wa.me/5547000000000" class="cta-btn">
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+    Falar no WhatsApp
+  </a>
+</section>
+
+<footer>
+  <p>Feito com 🍪 e muito amor — <strong>Amanteigados da Tay</strong></p>
+</footer>
+
+<script>
+  // Animate product cards on scroll
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach((e, i) => {
+      if (e.isIntersecting) {
+        setTimeout(() => {
+          e.target.style.opacity = '1';
+          e.target.style.transform = 'translateY(0)';
+        }, i * 80);
+        observer.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.1 });
+
+  document.querySelectorAll('.product-card').forEach(card => {
+    card.style.opacity = '0';
+    card.style.transform = 'translateY(20px)';
+    card.style.transition = 'opacity .5s ease, transform .5s ease, box-shadow .25s, transform .25s';
+    observer.observe(card);
+  });
+</script>
+</body>
+</html>
